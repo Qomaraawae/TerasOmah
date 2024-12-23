@@ -1,67 +1,60 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
+// Membuat context keranjang
 const CartContext = createContext();
 
-const cartReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      const existingItem = state.items.find(item => item.id === action.payload.id);
-      if (existingItem) {
-        return {
-          ...state,
-          items: state.items.map(item =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
-        };
-      }
-      return {
-        ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }],
-      };
-
-    case 'REMOVE_FROM_CART':
-      return {
-        ...state,
-        items: state.items.filter(item => item.id !== action.payload),
-      };
-
-    case 'UPDATE_QUANTITY':
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
-            : item
-        ),
-      };
-
-    case 'CLEAR_CART':
-      return {
-        ...state,
-        items: [],
-      };
-
-    default:
-      return state;
-  }
-};
-
+// Membuat provider untuk CartContext
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const [cart, setCart] = useState([]);
+
+  // Menambah item ke keranjang
+  const addToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (cartItem) => cartItem.id === item.id
+      );
+
+      if (existingItemIndex !== -1) {
+        // Gunakan spread operator untuk membuat salinan array
+        const updatedCart = [...prevCart];
+        // Pastikan increment hanya 1
+        const currentQuantity = updatedCart[existingItemIndex].quantity;
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
+          quantity: currentQuantity + 1,
+        };
+        return updatedCart;
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  // Menghapus item dari keranjang atau mengurangi jumlah item
+  const removeFromCart = (id) => {
+    setCart(
+      (prevCart) =>
+        prevCart
+          .map((item) =>
+            item.id === id
+              ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 0 } // Kurangi quantity
+              : item
+          )
+          .filter((item) => item.quantity > 0) // Hapus item dengan quantity 0
+    );
+  };
+
+  // Membersihkan semua item di keranjang
+  const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
-};
+// Hook untuk menggunakan context Cart
+export const useCart = () => useContext(CartContext);
