@@ -1,0 +1,117 @@
+{
+    "makanan": [
+      {
+        "id": 1,
+        "name": "Nasi + Ayam Goreng",
+        "price": 20000,
+        "image": "gf_ayam.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Nasi + Ayam Geprek",
+        "price": 20000,
+        "image": "gf_ayam_geprek.jpg"
+      },
+      {
+        "id": 3,
+        "name": "Nasi + Lele Goreng",
+        "price": 20000,
+        "image": "gf_lele.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Nasi + Nila Goreng",
+        "price": 20000,
+        "image": "gf_nila.jpg"
+      }
+    ],
+    "camilan": [
+      {
+        "id": 5,
+        "name": "Kentang Goreng",
+        "price": 12000,
+        "image": "gf_kentang.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Otak-Otak + Kentang Goreng",
+        "price": 15000,
+        "image": "gf_otak.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Tempe Mendoan",
+        "price": 10000,
+        "image": "gf_mendoan.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Piscokju",
+        "price": 15000,
+        "image": "gf_pisang_hoheng.jpg"
+      }
+    ],
+    "minuman": [
+      {
+        "id": 9,
+        "name": "Kopi Susu T.O",
+        "price": 15000,
+        "image": "gf_kopi_susu_to.jpg"
+      },
+      {
+        "id": 10,
+        "name": "Teh Talua",
+        "price": 12000,
+        "image": "gf_teh_talua.jpg"
+      },
+      {
+        "id": 11,
+        "name": "Es Jeruk Peras",
+        "price": 10000,
+        "image": "gf_es_jeruk_peras.jpg"
+      },
+      {
+        "id": 12,
+        "name": "Jus Alpukat",
+        "price": 15000,
+        "image": "gf_jus_alpukat.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Jus Mangga",
+        "price": 15000,
+        "image": "gf_jus_mangga.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Jus Naga",
+        "price": 15000,
+        "image": "gf_jus_buah_naga.jpg"
+      },
+      {
+        "id": 15,
+        "name": "Timun Serut",
+        "price": 15000,
+        "image": "gf_es_timun.jpg"
+      },
+      {
+        "id": 16,
+        "name": "Milkshake Chocolate",
+        "price": 15000,
+        "image": "gf_milkshake_coklat.jpg"
+      },
+      {
+        "id": 17,
+        "name": "Milkshake Strawberry",
+        "price": 15000,
+        "image": "gf_milkshake_strawberry.jpg"
+      },
+      {
+        "id": 18,
+        "name": "Milkshake Green Tea",
+        "price": 15000,
+        "image": "gf_milkshake_green_tea.jpg"
+      }
+    ]
+  }
+  

@@ -10,21 +10,18 @@ export const CartProvider = ({ children }) => {
   // Menambah item ke keranjang
   const addToCart = (item) => {
     setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex(
-        (cartItem) => cartItem.id === item.id
-      );
+      // Cari item yang sudah ada di keranjang
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
 
-      if (existingItemIndex !== -1) {
-        // Gunakan spread operator untuk membuat salinan array
-        const updatedCart = [...prevCart];
-        // Pastikan increment hanya 1
-        const currentQuantity = updatedCart[existingItemIndex].quantity;
-        updatedCart[existingItemIndex] = {
-          ...updatedCart[existingItemIndex],
-          quantity: currentQuantity + 1,
-        };
-        return updatedCart;
+      if (existingItem) {
+        // Jika item sudah ada, perbarui quantity-nya
+        return prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 } // Tambah 1 untuk item yang ada
+            : cartItem
+        );
       } else {
+        // Jika item belum ada, tambahkan ke keranjang dengan quantity 1
         return [...prevCart, { ...item, quantity: 1 }];
       }
     });
@@ -32,15 +29,14 @@ export const CartProvider = ({ children }) => {
 
   // Menghapus item dari keranjang atau mengurangi jumlah item
   const removeFromCart = (id) => {
-    setCart(
-      (prevCart) =>
-        prevCart
-          .map((item) =>
-            item.id === id
-              ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 0 } // Kurangi quantity
-              : item
-          )
-          .filter((item) => item.quantity > 0) // Hapus item dengan quantity 0
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 0 } // Kurangi quantity
+            : item
+        )
+        .filter((item) => item.quantity > 0) // Hapus item yang quantity-nya 0
     );
   };
 
@@ -48,9 +44,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

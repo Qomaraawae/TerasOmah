@@ -9,11 +9,15 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link to="/" className="text-xl font-bold text-gray-800">
-            Teras Omah
+            <Link to="/">
+              <img 
+                src={process.env.PUBLIC_URL + "/images/logo.png"} 
+                alt="Teras Omah Logo" 
+                className="h-16 md:h-20" // Meningkatkan ukuran logo, sesuaikan angka sesuai keinginan
+              />
             </Link>
           </div>
-          
+
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -24,9 +28,8 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-600 hover:text-gray-800">Beranda</Link>
             <Link to="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link to="/contact" className="text-gray-600 hover:text-gray-800">Kontak</Link>
+            <Link to="/contact" className="text-gray-600 hover:text-gray-800">Kritik dan Saran</Link>
           </div>
         </div>
       </div>
@@ -34,9 +37,8 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" className="block px-3 py-2 text-gray-600 hover:text-gray-800">Beranda</Link>
             <Link to="/menu" className="block px-3 py-2 text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link to="/contact" className="block px-3 py-2 text-gray-600 hover:text-gray-800">Kontak</Link>
+            <Link to="/contact" className="block px-3 py-2 text-gray-600 hover:text-gray-800">Kritik dan Saran</Link>
           </div>
         </div>
       )}

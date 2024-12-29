@@ -34,7 +34,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* Rute kategori (makanan, minuman, camilan) */}
           <Route path="/menu" element={<Menu />} />
+          <Route path="/menu/:category" element={<Menu />} /> {/* Kategori dinamis */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
