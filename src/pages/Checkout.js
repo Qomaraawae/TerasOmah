@@ -109,7 +109,7 @@ const Checkout = () => {
                 onClick={confirmPayment}
                 className="px-6 py-2 bg-green-500 text-white rounded-full hover:bg-green-700"
               >
-                Konfirmasi Pembayaran
+                Konfirmasi Pemesanan
               </button>
             </div>
           </div>
