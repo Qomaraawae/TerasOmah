@@ -140,7 +140,7 @@ const Cart = () => {
               onClick={handleConfirmPayment}
               className="mt-4 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800"
             >
-              Konfirmasi Pembayaran
+              Konfirmasi Pemesanan
             </button>
             <button
               onClick={clearCart}
