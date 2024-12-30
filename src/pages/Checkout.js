@@ -89,7 +89,7 @@ const Checkout = () => {
           onClick={handlePayment}
           className="w-full py-2 bg-green-500 text-white rounded-lg mt-4 hover:bg-green-700 transition"
         >
-          Konfirmasi Pembayaran
+          Konfirmasi Pemesanan
         </button>
       </div>
 
