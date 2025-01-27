@@ -2,17 +2,32 @@ import { useState } from "react";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // Fungsi untuk menangani klik pada gambar dan menampilkan teks atau berpindah halaman
-  const handleCategoryClick = (category) => {
+  // Fungsi debounce
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  // Fungsi untuk menangani klik pada gambar
+  const handleCategoryClick = debounce((category) => {
+    if (isNavigating) return;
+
     if (selectedCategory === category) {
       // Jika sudah dipilih, arahkan ke halaman kategori
+      setIsNavigating(true);
       window.location.href = `/menu/${category}`;
     } else {
       // Jika gambar belum ditekan, set kategori yang dipilih
       setSelectedCategory(category);
     }
-  };
+  }, 300); // Delay 300ms
 
   return (
     <div className="min-h-screen flex flex-col">
