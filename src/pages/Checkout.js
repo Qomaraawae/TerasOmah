@@ -10,7 +10,10 @@ const Checkout = () => {
 
   // Fungsi untuk menghitung subtotal, pajak, biaya penanganan, dan total
   const calculateTotals = () => {
-    const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    const subtotal = cart.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
     const handlingFee = 2000;
     const tax = subtotal * 0.11;
     const total = subtotal + handlingFee + tax;
@@ -28,7 +31,9 @@ const Checkout = () => {
     // Menambahkan item ke dalam PDF
     cart.forEach((item) => {
       doc.text(
-        `${item.name} x ${item.quantity} - Rp ${(item.price * item.quantity).toLocaleString("id-ID")}`,
+        `${item.name} x ${item.quantity} - Rp ${(
+          item.price * item.quantity
+        ).toLocaleString("id-ID")}`,
         20,
         yPosition
       );
@@ -37,8 +42,16 @@ const Checkout = () => {
 
     // Menambahkan subtotal, pajak, biaya penanganan, dan total ke dalam PDF
     doc.text(`Subtotal: Rp ${subtotal.toLocaleString("id-ID")}`, 20, yPosition);
-    doc.text(`Tax (11%): Rp ${tax.toLocaleString("id-ID")}`, 20, yPosition + 10);
-    doc.text(`Handling Fee: Rp ${handlingFee.toLocaleString("id-ID")}`, 20, yPosition + 20);
+    doc.text(
+      `Tax (11%): Rp ${tax.toLocaleString("id-ID")}`,
+      20,
+      yPosition + 10
+    );
+    doc.text(
+      `Handling Fee: Rp ${handlingFee.toLocaleString("id-ID")}`,
+      20,
+      yPosition + 20
+    );
     doc.text(`Total: Rp ${total.toLocaleString("id-ID")}`, 20, yPosition + 30);
 
     // Mengunduh PDF secara otomatis
@@ -64,8 +77,12 @@ const Checkout = () => {
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
         {cart.map((item) => (
           <div key={item.id} className="flex justify-between">
-            <span>{item.name} x {item.quantity}</span>
-            <span>Rp {(item.price * item.quantity).toLocaleString("id-ID")}</span>
+            <span>
+              {item.name} x {item.quantity}
+            </span>
+            <span>
+              Rp {(item.price * item.quantity).toLocaleString("id-ID")}
+            </span>
           </div>
         ))}
         {/* Menampilkan subtotal, handling fee, dan pajak */}
@@ -96,7 +113,9 @@ const Checkout = () => {
       {isPopupOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-lg shadow-lg p-6 space-y-4">
-            <h3 className="text-xl font-semibold mb-4">Konfirmasi Pembayaran</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              Konfirmasi Pembayaran
+            </h3>
             <p>Apakah Anda yakin ingin melanjutkan pembayaran?</p>
             <div className="flex justify-between">
               <button
