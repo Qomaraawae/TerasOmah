@@ -27,24 +27,29 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Menghapus item dari keranjang atau mengurangi jumlah item
+  // Mengurangi jumlah item tanpa menghapus dari keranjang
   const removeFromCart = (id) => {
     setCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 0 } // Kurangi quantity
-            : item
-        )
-        .filter((item) => item.quantity > 0) // Hapus item yang quantity-nya 0
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(0, item.quantity - 1) } // Kurangi quantity hingga minimum 0
+          : item
+      )
     );
+  };
+
+  // Menghapus item dari keranjang sepenuhnya
+  const deleteFromCart = (id) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id)); // Menghapus item berdasarkan id
   };
 
   // Membersihkan semua item di keranjang
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, deleteFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
