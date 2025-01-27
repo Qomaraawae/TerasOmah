@@ -8,6 +8,7 @@ import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound"; // Import halaman Not Found
 import { useNavigate } from "react-router-dom";
 
 const CartIcon = () => {
@@ -33,7 +34,7 @@ function App() {
       <Router>
         <div className="min-h-screen flex flex-col">
           {" "}
-          {/* Menambahkan min-h-screen dan flex */}
+          {/* Pastikan menggunakan flex */}
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -44,8 +45,9 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} /> {/* Rute fallback */}
           </Routes>
-          <Footer /> {/* Letakkan footer setelah Routes */}
+          <Footer />
         </div>
         <CartIcon />
       </Router>
