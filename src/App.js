@@ -31,17 +31,22 @@ function App() {
   return (
     <CartProvider>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* Rute kategori (makanan, minuman, camilan) */}
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/menu/:category" element={<Menu />} /> {/* Kategori dinamis */}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          {" "}
+          {/* Menambahkan min-h-screen dan flex */}
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* Rute kategori (makanan, minuman, camilan) */}
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/menu/:category" element={<Menu />} />{" "}
+            {/* Kategori dinamis */}
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+          <Footer /> {/* Letakkan footer setelah Routes */}
+        </div>
         <CartIcon />
       </Router>
     </CartProvider>
