@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cart } = useCart();
+  const navigate = useNavigate();
+
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const handleCartClick = () => {
+    setIsCartOpen(!isCartOpen);
+    setIsMenuOpen(false);
+    navigate("/cart");
+  };
 
   return (
     <nav className="bg-white shadow-lg z-50">
-      {" "}
-      {/* Menambahkan z-index */}
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -41,6 +51,12 @@ const Navbar = () => {
                   isMenuOpen ? "-rotate-45 absolute" : ""
                 } ${isMenuOpen ? "top-2" : ""}`}
               ></div>
+              {/* Tanda Jumlah Item pada Hamburger */}
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-2">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
 
@@ -52,10 +68,30 @@ const Navbar = () => {
             <Link to="/contact" className="text-gray-600 hover:text-gray-800">
               Kritik dan Saran
             </Link>
+
+            {/* Ikon Keranjang di Pojok Kanan dengan Transisi */}
+            <div
+              className={`relative transition-all duration-300 ease-in-out ${
+                isMenuOpen ? "translate-y-12" : ""
+              }`}
+            >
+              <button
+                onClick={handleCartClick}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                <i className="fa fa-shopping-cart text-2xl"></i>
+                {totalItems > 0 && (
+                  <span className="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-2">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      {/* Menu Mobile dengan transisi turun ke bawah */}
+
+      {/* Menu Mobile */}
       <div
         className={`md:hidden fixed top-0 left-0 w-full bg-white text-gray-800 h-full transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
@@ -69,7 +105,7 @@ const Navbar = () => {
             &times;
           </button>
         </div>
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-2">
           <Link
             to="/menu"
             className="text-lg"
@@ -84,6 +120,21 @@ const Navbar = () => {
           >
             Kritik dan Saran
           </Link>
+
+          {/* Ikon Keranjang di Menu Mobile tanpa space tambahan */}
+          <div className="relative mt-2">
+            <button
+              onClick={handleCartClick}
+              className="text-gray-600 hover:text-gray-800"
+            >
+              <i className="fa fa-shopping-cart text-2xl"></i>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-2">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </nav>
