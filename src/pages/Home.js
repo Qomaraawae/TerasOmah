@@ -36,7 +36,7 @@ const Home = () => {
         <img
           src="/images/banner1.jpg"
           alt="Restaurant hero"
-          className="w-full h-full object-cover md:object-contain transition-all duration-500"
+          className="w-full h-full object-cover transition-all duration-500"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300">
           <div className="text-center text-white px-4 md:px-12">
